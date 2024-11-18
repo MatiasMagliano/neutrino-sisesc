@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Materia;
 use App\Models\Curso;
 
+use App\Enums\Status;
+
 class AnioLectivo extends Model
 {
     protected $table = 'anios_lectivos';
@@ -20,9 +22,10 @@ class AnioLectivo extends Model
     ];
 
     public $casts = [
-         'anio' => 'integer',
-         'fecha_inicio' => 'datetime:Y-m-d',
-         'fecha_fin' => 'datetime:Y-m-d'
+        'activo' => Status::class,
+        'anio' => 'integer',
+        'fecha_inicio' => 'datetime:Y-m-d',
+        'fecha_fin' => 'datetime:Y-m-d'
     ];
 
     // Scope de año lectivo

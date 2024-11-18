@@ -96,7 +96,10 @@ class MatriculaRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('nombre')
             ->columns([
-                Tables\Columns\TextColumn::make('ciclo')->label('Ciclo')->sortable(),
+                Tables\Columns\TextColumn::make('ciclo')
+                    ->label('Ciclo')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('nombre.curso')
                     ->label('Denominación')
                     ->state(function (Curso $curso): string {

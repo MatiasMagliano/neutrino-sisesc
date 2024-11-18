@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use App\Enums\Status;
+
 class Estudiante extends Model
 {
     use HasFactory;
@@ -27,7 +29,8 @@ class Estudiante extends Model
     ];
 
     protected $casts = [
-         'f_nacimiento' => 'date',
+        'activo' => Status::class,
+        'f_nacimiento' => 'date',
     ];
 
     // Scope de año lectivo
@@ -39,11 +42,11 @@ class Estudiante extends Model
     // Relaciones
     public function anioLectivo()
     {
-        return $this->belongsTo(AnioLectivo::class);
+        return $this->belongsTo(AnioLectivo::class, 'anio_lectivo_id');
     }
 
-    public function cursos() {
-        return $this->belongsTo(Curso::class, 'curso_id');
+    public function curso() {
+        return $this->belongsTo(Curso::class, 'curso_id', 'id');
     }
 
     public function materias() {

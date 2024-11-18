@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-
+use App\Enums\Status;
 
 use App\Filament\Resources\AnioLectivoResource\Pages;
 use App\Filament\Resources\AnioLectivoResource\RelationManagers\MatriculaRelationManager;
@@ -86,16 +86,24 @@ class AnioLectivoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('anio')
+                Tables\Columns\TextColumn::make('activo')
+                    ->label('Estado')
+                    ->badge(),
+
+                Tables\Columns\TextColumn::make('anio')
                     ->label('Año lectivo'),
 
-                TextColumn::make('fecha_inicio')
+                    Tables\Columns\TextColumn::make('fecha_inicio')
                     ->label('Fecha de Inicio')
                     ->dateTime('d/m/Y'),
 
-                TextColumn::make('fecha_fin')
+                    Tables\Columns\TextColumn::make('fecha_fin')
                     ->label('Fecha de Fin')
                     ->dateTime('d/m/Y'),
+
+                Tables\Columns\TextColumn::make('estudiantes_count')
+                    ->label('Estudiantes')
+                    ->counts('estudiantes')
             ])
             ->defaultSort('anio', 'desc')
             ->filters([
